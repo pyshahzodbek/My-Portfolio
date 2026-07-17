@@ -1,0 +1,60 @@
+{
+    "loading": "Yuklanmoqda...",
+    "nav": {
+        "home": "Bosh sahifa",
+        "about": "Men haqimda",
+        "skills": "Ko'nikmalar",
+        "projects": "Loyihalar",
+        "contact": "Aloqa"
+    },
+    "hero": {
+        "greeting": "Salom, men",
+        "description": "Men zamonaviy veb-texnologiyalar yordamida chiroyli va funksional veb-saytlar yarataman. Dasturlash — mening ishim va ishqim.",
+        "viewProjects": "Loyihalarimni ko'rish",
+        "contact": "Bog'lanish",
+        "scroll": "Pastga aylantirish"
+    },
+    "stats": {
+        "projects": "Loyihalar",
+        "stars": "Yulduzlar",
+        "followers": "Obunachilar"
+    },
+    "about": {
+        "title": "Men haqimda",
+        "subtitle": "Kamroq gap, ko'proq kod",
+        "description": "Men tajribali dasturchiman. Veb dasturlash, mobil ilovalar va boshqa sohalarda ish tajribam bor. Doimiy o'rganish va rivojlanish mening asosiy tamoyillarim.",
+        "experience": "Tajribali dasturchi",
+        "downloadCV": "CV yuklab olish"
+    },
+    "skills": {
+        "title": "Ko'nikmalarim",
+        "subtitle": "Texnologiyalar va vositalar",
+        "all": "Hammasi"
+    },
+    "projects": {
+        "title": "Loyihalarim",
+        "subtitle": "Oxirgi ishlarim",
+        "all": "Hammasi",
+        "manual": "Qo'lda",
+        "viewAll": "Barcha loyihalarni ko'rish"
+    },
+    "contact": {
+        "title": "Bog'lanish",
+        "subtitle": "Loyihangiz bormi? Men bilan bog'laning!",
+        "name": "Ismingiz",
+        "email": "Email manzilingiz",
+        "company": "Kompaniya (ixtiyoriy)",
+        "subject": "Mavzu",
+        "message": "Xabar",
+        "send": "Yuborish",
+        "sendMessage": "Xabar yuborish",
+        "writeTelegram": "Telegram da yozish",
+        "location": "Joylashuv"
+    },
+    "footer": {
+        "tagline": "Kod orqali orzularni ro'yobga chiqaraman",
+        "quickLinks": "Tezkor havolalar",
+        "follow": "Kuzatib boring",
+        "copyright": "Portfolio. Barcha huquqlar himoyalangan."
+    }
+}

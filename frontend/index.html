@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Junior Developer Portfolio - Full-stack dasturchi">
+    <meta name="keywords" content="portfolio, developer, frontend, backend, devops">
+    <meta name="author" content="Portfolio">
+    
+    <title>Portfolio | Junior Developer</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loader">
+            <div class="loader-spinner"></div>
+            <p class="loader-text" data-i18n="loading">Yuklanmoqda...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="nav-logo">
+                <span class="logo-text">&lt;Dev /&gt;</span>
+            </a>
+            
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link active" data-i18n="nav.home">Bosh sahifa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link" data-i18n="nav.about">Men haqimda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#skills" class="nav-link" data-i18n="nav.skills">Ko'nikmalar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#projects" class="nav-link" data-i18n="nav.projects">Loyihalar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link" data-i18n="nav.contact">Aloqa</a>
+                    </li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <!-- Language Switcher -->
+                    <div class="language-switcher">
+                        <button class="lang-btn" id="lang-btn" aria-label="Tilni o'zgartirish">
+                            <i data-lucide="globe" class="icon"></i>
+                            <span id="current-lang">UZ</span>
+                            <i data-lucide="chevron-down" class="icon icon-sm"></i>
+                        </button>
+                        <div class="lang-dropdown" id="lang-dropdown">
+                            <button class="lang-option active" data-lang="uz">
+                                <span class="flag">🇺🇿</span> O'zbek
+                            </button>
+                            <button class="lang-option" data-lang="ru">
+                                <span class="flag">🇷🇺</span> Русский
+                            </button>
+                            <button class="lang-option" data-lang="en">
+                                <span class="flag">🇬🇧</span> English
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Mavzuni o'zgartirish">
+                        <i data-lucide="sun" class="icon theme-icon-light"></i>
+                        <i data-lucide="moon" class="icon theme-icon-dark"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="nav-toggle" id="nav-toggle" aria-label="Menyuni ochish">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <p class="hero-greeting" data-i18n="hero.greeting">Salom, men</p>
+                    <h1 class="hero-name">
+                        <span class="name-highlight" id="hero-name">Developer</span>
+                    </h1>
+                    <h2 class="hero-title">
+                        <span class="typed-text" id="typed-text"></span>
+                        <span class="cursor">|</span>
+                    </h2>
+                    <p class="hero-description" data-i18n="hero.description">
+                        Men zamonaviy veb-texnologiyalar yordamida chiroyli va funksional veb-saytlar yarataman.
+                    </p>
+                    
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">
+                            <i data-lucide="folder-open" class="icon"></i>
+                            <span data-i18n="hero.viewProjects">Loyihalarimni ko'rish</span>
+                        </a>
+                        <a href="#contact" class="btn btn-outline">
+                            <i data-lucide="mail" class="icon"></i>
+                            <span data-i18n="hero.contact">Bog'lanish</span>
+                        </a>
+                    </div>
+                    
+                    <div class="hero-social">
+                        <a href="#" class="social-link" id="github-link" target="_blank" aria-label="GitHub">
+                            <i data-lucide="github" class="icon"></i>
+                        </a>
+                        <a href="#" class="social-link" id="linkedin-link" target="_blank" aria-label="LinkedIn">
+                            <i data-lucide="linkedin" class="icon"></i>
+                        </a>
+                        <a href="#" class="social-link" id="telegram-link" target="_blank" aria-label="Telegram">
+                            <i data-lucide="send" class="icon"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-image">
+                    <div class="image-wrapper">
+                        <div class="image-placeholder" id="profile-image">
+                            <i data-lucide="user" class="icon icon-xl"></i>
+                        </div>
+                        <div class="image-decoration"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats -->
+            <div class="hero-stats" id="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="0">0</span>
+                    <span class="stat-label" data-i18n="stats.projects">Loyihalar</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="0">0</span>
+                    <span class="stat-label" data-i18n="stats.stars">Yulduzlar</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="0">0</span>
+                    <span class="stat-label" data-i18n="stats.followers">Obunachilar</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <a href="#about" aria-label="Pastga aylantirish">
+                <i data-lucide="mouse" class="icon"></i>
+                <span data-i18n="hero.scroll">Pastga aylantirish</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="about.title">Men haqimda</h2>
+                <p class="section-subtitle" data-i18n="about.subtitle">Kamroq gap, ko'proq kod</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-description" id="about-description">
+                        Men tajribali dasturchiman. Veb dasturlash, mobil ilovalar va boshqa sohalarda ish tajribam bor.
+                    </p>
+                    
+                    <div class="about-info">
+                        <div class="info-item">
+                            <i data-lucide="map-pin" class="icon"></i>
+                            <span id="location">Toshkent, O'zbekiston</span>
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="mail" class="icon"></i>
+                            <span id="email">example@email.com</span>
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="briefcase" class="icon"></i>
+                            <span id="experience" data-i18n="about.experience">Tajribali dasturchi</span>
+                        </div>
+                    </div>
+                    
+                    <div class="about-buttons">
+                        <a href="#" class="btn btn-primary" id="download-cv">
+                            <i data-lucide="download" class="icon"></i>
+                            <span data-i18n="about.downloadCV">CV yuklab olish</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <div class="image-wrapper">
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="code-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="code-title">about.py</span>
+                            </div>
+                            <pre class="code-content"><code><span class="keyword">class</span> <span class="class-name">Developer</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="keyword">self</span>):
+        <span class="keyword">self</span>.name = <span class="string">"Developer"</span>
+        <span class="keyword">self</span>.skills = [<span class="string">"Python"</span>, <span class="string">"JavaScript"</span>]
+        <span class="keyword">self</span>.passion = <span class="string">"Coding"</span>
+    
+    <span class="keyword">def</span> <span class="function">work</span>(<span class="keyword">self</span>):
+        <span class="keyword">return</span> <span class="string">"Building amazing things"</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="skills.title">Ko'nikmalarim</h2>
+                <p class="section-subtitle" data-i18n="skills.subtitle">Texnologiyalar va vositalar</p>
+            </div>
+            
+            <div class="skills-filter">
+                <button class="filter-btn active" data-filter="all" data-i18n="skills.all">Hammasi</button>
+                <!-- Kategoriyalar dinamik qo'shiladi -->
+            </div>
+            
+            <div class="skills-grid" id="skills-grid">
+                <!-- Ko'nikmalar dinamik qo'shiladi -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="projects.title">Loyihalarim</h2>
+                <p class="section-subtitle" data-i18n="projects.subtitle">Oxirgi ishlarim</p>
+            </div>
+            
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all" data-i18n="projects.all">Hammasi</button>
+                <button class="filter-btn" data-filter="github">GitHub</button>
+                <button class="filter-btn" data-filter="manual" data-i18n="projects.manual">Qo'lda</button>
+            </div>
+            
+            <div class="projects-grid" id="projects-grid">
+                <!-- Loyihalar dinamik qo'shiladi -->
+            </div>
+            
+            <div class="projects-more">
+                <a href="#" class="btn btn-outline" id="github-profile" target="_blank">
+                    <i data-lucide="github" class="icon"></i>
+                    <span data-i18n="projects.viewAll">Barcha loyihalarni ko'rish</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="contact.title">Bog'lanish</h2>
+                <p class="section-subtitle" data-i18n="contact.subtitle">Loyihangiz bormi? Men bilan bog'laning!</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i data-lucide="mail" class="icon"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p id="contact-email">example@email.com</p>
+                        <a href="mailto:example@email.com" class="contact-link" data-i18n="contact.sendMessage">Xabar yuborish</a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i data-lucide="send" class="icon"></i>
+                        </div>
+                        <h3>Telegram</h3>
+                        <p id="contact-telegram">@username</p>
+                        <a href="#" class="contact-link" id="telegram-link-contact" target="_blank" data-i18n="contact.writeTelegram">Telegram da yozish</a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i data-lucide="map-pin" class="icon"></i>
+                        </div>
+                        <h3 data-i18n="contact.location">Joylashuv</h3>
+                        <p id="contact-location">Toshkent, O'zbekiston</p>
+                    </div>
+                </div>
+                
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <label for="name" data-i18n="contact.name">Ismingiz</label>
+                            <input type="text" id="name" name="name" required placeholder="Ismingizni kiriting">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" data-i18n="contact.email">Email manzilingiz</label>
+                            <input type="email" id="email" name="email" required placeholder="email@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company" data-i18n="contact.company">Kompaniya (ixtiyoriy)</label>
+                            <input type="text" id="company" name="company" placeholder="Kompaniya nomi">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject" data-i18n="contact.subject">Mavzu</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Xabar mavzusi">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" data-i18n="contact.message">Xabar</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Xabaringizni yozing..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i data-lucide="send" class="icon"></i>
+                            <span data-i18n="contact.send">Yuborish</span>
+                        </button>
+                    </form>
+                    
+                    <div class="form-status" id="form-status"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-text">&lt;Dev /&gt;</span>
+                    <p class="footer-tagline" data-i18n="footer.tagline">Kod orqali orzularni ro'yobga chiqaraman</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4 data-i18n="footer.quickLinks">Tezkor havolalar</h4>
+                    <ul>
+                        <li><a href="#home" data-i18n="nav.home">Bosh sahifa</a></li>
+                        <li><a href="#about" data-i18n="nav.about">Men haqimda</a></li>
+                        <li><a href="#skills" data-i18n="nav.skills">Ko'nikmalar</a></li>
+                        <li><a href="#projects" data-i18n="nav.projects">Loyihalar</a></li>
+                        <li><a href="#contact" data-i18n="nav.contact">Aloqa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h4 data-i18n="footer.follow">Kuzatib boring</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link" id="footer-github" target="_blank" aria-label="GitHub">
+                            <i data-lucide="github" class="icon"></i>
+                        </a>
+                        <a href="#" class="social-link" id="footer-linkedin" target="_blank" aria-label="LinkedIn">
+                            <i data-lucide="linkedin" class="icon"></i>
+                        </a>
+                        <a href="#" class="social-link" id="footer-telegram" target="_blank" aria-label="Telegram">
+                            <i data-lucide="send" class="icon"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> <span data-i18n="footer.copyright">Portfolio. Barcha huquqlar himoyalangan.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="back-to-top" aria-label="Yuqoriga">
+        <i data-lucide="arrow-up" class="icon"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

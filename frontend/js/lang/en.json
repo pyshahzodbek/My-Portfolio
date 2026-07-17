@@ -1,0 +1,60 @@
+{
+    "loading": "Loading...",
+    "nav": {
+        "home": "Home",
+        "about": "About",
+        "skills": "Skills",
+        "projects": "Projects",
+        "contact": "Contact"
+    },
+    "hero": {
+        "greeting": "Hello, I'm",
+        "description": "I create beautiful and functional websites using modern web technologies. Programming is my work and passion.",
+        "viewProjects": "View My Projects",
+        "contact": "Get In Touch",
+        "scroll": "Scroll Down"
+    },
+    "stats": {
+        "projects": "Projects",
+        "stars": "Stars",
+        "followers": "Followers"
+    },
+    "about": {
+        "title": "About Me",
+        "subtitle": "Less talk, more code",
+        "description": "I'm an experienced developer. I have experience in web development, mobile apps, and other areas. Continuous learning and development are my core principles.",
+        "experience": "Experienced Developer",
+        "downloadCV": "Download CV"
+    },
+    "skills": {
+        "title": "My Skills",
+        "subtitle": "Technologies & Tools",
+        "all": "All"
+    },
+    "projects": {
+        "title": "My Projects",
+        "subtitle": "Recent Works",
+        "all": "All",
+        "manual": "Manual",
+        "viewAll": "View All Projects"
+    },
+    "contact": {
+        "title": "Get In Touch",
+        "subtitle": "Have a project? Let's work together!",
+        "name": "Your Name",
+        "email": "Your Email",
+        "company": "Company (optional)",
+        "subject": "Subject",
+        "message": "Message",
+        "send": "Send",
+        "sendMessage": "Send Message",
+        "writeTelegram": "Write on Telegram",
+        "location": "Location"
+    },
+    "footer": {
+        "tagline": "Turning dreams into code",
+        "quickLinks": "Quick Links",
+        "follow": "Follow Me",
+        "copyright": "Portfolio. All rights reserved."
+    }
+}

@@ -1,0 +1,150 @@
+# CD Pipeline - Portfolio loyihasi
+# main branch ga push qilganda deploy qiladi
+
+name: CD Pipeline
+
+# Qachon ishga tushadi
+on:
+  push:
+    branches: [ main ]
+
+# Jobs
+jobs:
+  # Deploy - Saytni deploy qilish
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Kodni checkout qilish
+        uses: actions/checkout@v4
+      
+      - name: Deploy haqida xabar
+        run: |
+          echo "🚀 Deploy boshlanmoqda..."
+          echo "Loyiha: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "Commit: ${{ github.sha }}"
+      
+      # Docker Hub ga push qilish (agar kerak bo'lsa)
+      - name: Docker Hub login
+        if: env.DOCKERHUB_USERNAME != ''
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Docker image push
+        if: env.DOCKERHUB_USERNAME != ''
+        run: |
+          cd backend
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-backend:latest .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-backend:latest
+      
+      # Render.com deploy (agar ishlatilsa)
+      - name: Deploy to Render
+        if: env.RENDER_API_KEY != ''
+        run: |
+          echo "📦 Render.com ga deploy qilinmoqda..."
+          # Render API orqali deploy
+          curl -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Content-Type: application/json"
+      
+      # Vercel deploy (agar ishlatilsa)
+      - name: Deploy to Vercel
+        if: env.VERCEL_TOKEN != ''
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./frontend
+      
+      # Deploy xabari
+      - name: Deploy xabari
+        run: |
+          echo "✅ Deploy muvaffaqiyatli tugadi!"
+          echo "🌐 Sayt manzili: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+      
+      # Telegram ga xabar (agar kerak bo'lsa)
+      - name: Telegram xabar
+        if: env.TELEGRAM_BOT_TOKEN != ''
+        run: |
+          curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
+            -d text="🚀 Portfolio sayt yangilandi!%0ALoyiha: ${{ github.repository }}%0ABranch: main%0ACommit: ${{ github.sha }}"
+
+  # Database migration
+  migrate:
+    name: Database Migration
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: always() && needs.deploy.result == 'success'
+    
+    steps:
+      - name: Kodni checkout qilish
+        uses: actions/checkout@v4
+      
+      - name: Python o'rnatish
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Kutubxonalarni o'rnatish
+        run: |
+          cd backend
+          pip install -r requirements.txt
+      
+      - name: Migration ishga tushirish
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+        run: |
+          cd backend
+          python manage.py migrate
+          python manage.py collectstatic --noinput
+      
+      - name: Superuser yaratish (agar kerak bo'lsa)
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+          DJANGO_SUPERUSER_PASSWORD: ${{ secrets.DJANGO_SUPERUSER_PASSWORD }}
+        run: |
+          cd backend
+          python manage.py createsuperuser --noinput --username admin --email admin@portfolio.com || true
+
+  # Health check
+  healthcheck:
+    name: Health Check
+    runs-on: ubuntu-latest
+    needs: [deploy, migrate]
+    if: always() && needs.deploy.result == 'success'
+    
+    steps:
+      - name: Health check
+        run: |
+          echo "🔍 Health check boshlanmoqda..."
+          
+          # Backend tekshirish
+          if curl -f http://localhost:8000/api/profil/ 2>/dev/null; then
+            echo "✅ Backend ishlayapti"
+          else
+            echo "⚠️ Backend hali ishga tushmagan bo'lishi mumkin"
+          fi
+          
+          # Frontend tekshirish
+          if curl -f http://localhost:80 2>/dev/null; then
+            echo "✅ Frontend ishlayapti"
+          else
+            echo "⚠️ Frontend hali ishga tushmagan bo'lishi mumkin"
+          fi

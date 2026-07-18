@@ -32,6 +32,7 @@ urlpatterns = [
     path('loyihalar/<int:pk>/', views.LoyihaDetailView.as_view(), name='loyiha_detail'),
     
     # GitHub
+    path('github-pinned/', views.GitHubPinnedView.as_view(), name='github_pinned'),
     path('github-loyihalar/', views.GitHubProjectsView.as_view(), name='github_loyihalar'),
     path('github-statistika/', views.GitHubStatsView.as_view(), name='github_statistika'),
     

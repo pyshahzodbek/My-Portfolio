@@ -137,7 +137,7 @@ def kontakt_xabar_telegram(ism, email, kompaniya, mavzu, xabar):
 
 👤 <b>Kimdan:</b> {ism}
 📧 <b>Email:</b> {email}
-🏢 <b>Kompaniya:</b> {kompaniya orqali 'Ko\'rsatilmagan'}
+🏢 <b>Kompaniya:</b> {kompaniya if kompaniya else "Ko'rsatilmagan"}
 
 📝 <b>Mavzu:</b> {mavzu}
 

@@ -181,6 +181,6 @@ def get_github_stats(username=None):
         'jami_yulduzlar': total_stars,
         'jami_fork_lar': total_forks,
         'obunachilar': user_info.get('followers', 0),
-        'obuna_bo'lganlar': user_info.get('following', 0),
+        'obunalar_soni': user_info.get('following', 0),
         'ochilgan_ilovalar': user_info.get('public_gists', 0),
     }

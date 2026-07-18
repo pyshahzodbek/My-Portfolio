@@ -13,6 +13,8 @@ Views:
 """
 
 import logging
+import requests
+from django.conf import settings
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -123,6 +125,87 @@ class LoyihaDetailView(APIView):
         
         serializer = ProjectSerializer(loyiha)
         return Response(serializer.data)
+
+
+class GitHubPinnedView(APIView):
+    """
+    GitHub pinned loyihalari (GraphQL API)
+    Token xavfsiz backend da saqlanadi
+    """
+
+    def get(self, request):
+        username = settings.GITHUB_USERNAME
+        token = settings.GITHUB_API_TOKEN
+
+        if not username or not token:
+            return Response([])
+
+        query = """
+        query {
+          user(login: "%s") {
+            pinnedItems(first: 6, types: REPOSITORY) {
+              nodes {
+                ... on Repository {
+                  name
+                  description
+                  url
+                  homepageUrl
+                  primaryLanguage { name }
+                  stargazerCount
+                  forkCount
+                  isArchived
+                  repositoryTopics(first: 10) {
+                    nodes {
+                      topic { name }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        """ % username
+
+        try:
+            response = requests.post(
+                'https://api.github.com/graphql',
+                json={'query': query},
+                headers={
+                    'Authorization': f'bearer {token}',
+                    'Content-Type': 'application/json',
+                },
+                timeout=10,
+            )
+
+            if response.status_code != 200:
+                return Response([])
+
+            data = response.json()
+            pinned_nodes = data.get('data', {}).get('user', {}).get('pinnedItems', {}).get('nodes', [])
+
+            loyihalar = []
+            for repo in pinned_nodes:
+                tech_tags = [t['topic']['name'] for t in repo.get('repositoryTopics', {}).get('nodes', [])]
+                lang = repo.get('primaryLanguage', {}).get('name', '') if repo.get('primaryLanguage') else ''
+
+                loyihalar.append({
+                    'github_id': repo['name'],
+                    'nomi': repo['name'],
+                    'tavsif': repo.get('description', '') or '',
+                    'github_link': repo['url'],
+                    'live_link': repo.get('homepageUrl', '') or '',
+                    'til': lang,
+                    'stars': repo.get('stargazerCount', 0),
+                    'forks': repo.get('forkCount', 0),
+                    'tech_stack': ', '.join(tech_tags) if tech_tags else lang,
+                    'manba': 'github',
+                    'faol': not repo.get('isArchived', False),
+                })
+
+            return Response(loyihalar)
+
+        except Exception as e:
+            return Response([])
 
 
 class GitHubProjectsView(APIView):

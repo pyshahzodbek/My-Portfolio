@@ -2,11 +2,14 @@
 Django>=4.2,<5.0
 djangorestframework>=3.14,<4.0
 
-# CORS (Frontend bilan ishlash uchun)
+# CORS
 django-cors-headers>=4.3,<5.0
 
 # Environment variables
 python-decouple>=3.8,<4.0
+
+# Static files
+whitenoise>=6.5,<7.0
 
 # Rasm ishlash uchun
 Pillow>=10.0,<11.0
@@ -19,10 +22,3 @@ gunicorn>=21.2,<22.0
 
 # HTTP requests (GitHub API uchun)
 requests>=2.31,<3.0
-
-# Linting
-flake8>=6.0,<7.0
-
-# Testing
-pytest>=7.4,<8.0
-pytest-django>=4.5,<5.0

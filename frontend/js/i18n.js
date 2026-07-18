@@ -32,7 +32,7 @@ class I18n {
      */
     async loadTranslations(lang) {
         try {
-            const response = await fetch(`./js/lang/${lang}.json`);
+            const response = await fetch(`./js/lang/${lang}.json?v=${Date.now()}`);
             
             if (!response.ok) {
                 throw new Error(`HTTP xato: ${response.status}`);

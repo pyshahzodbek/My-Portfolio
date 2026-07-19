@@ -1,26 +1,19 @@
 {
   "version": 2,
   "name": "portfolio-frontend",
-  "builds": [
-    {
-      "src": "frontend/**",
-      "use": "@vercel/static"
-    }
-  ],
   "outputDirectory": "frontend",
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/frontend/index.html"
-    }
+    { "src": "/css/(.*)", "dest": "/frontend/css/$1" },
+    { "src": "/js/(.*)", "dest": "/frontend/js/$1" },
+    { "src": "/images/(.*)", "dest": "/frontend/images/$1" },
+    { "src": "/(.*)", "dest": "/frontend/$1" }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
         { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-XSS-Protection", "value": "1; mode=block" }
+        { "key": "X-Frame-Options", "value": "DENY" }
       ]
     },
     {

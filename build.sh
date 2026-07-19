@@ -14,7 +14,7 @@ pip install -r requirements.txt
 # Static fayllarni yig'ish
 python manage.py collectstatic --noinput
 
-# Migration
+# Migration (SQLite uchun)
 python manage.py migrate --noinput
 
 echo "Build complete!"

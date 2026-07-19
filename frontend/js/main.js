@@ -6,7 +6,9 @@
 // Configuration
 // ===================================
 const CONFIG = {
-    API_BASE_URL: 'http://localhost:8000/api',
+    API_BASE_URL: window.location.hostname === 'localhost'
+        ? 'http://localhost:8000/api'
+        : 'https://portfolio-backend.onrender.com/api',
     GITHUB_API_URL: 'https://api.github.com',
     GITHUB_USERNAME: 'pyshahzodbek',
     TYPING_SPEED: 100,

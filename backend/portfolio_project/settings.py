@@ -4,9 +4,10 @@ Django sozlamalari - Portfolio loyihasi
 
 import os
 from pathlib import Path
-from decouple import config
+from decouple import Config, RepositoryEnv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+config = Config(RepositoryEnv(str(BASE_DIR / '.env')))
 
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-change-me-in-production')
 DEBUG = config('DEBUG', default=False, cast=bool)

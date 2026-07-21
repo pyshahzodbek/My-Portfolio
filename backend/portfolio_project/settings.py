@@ -100,7 +100,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = config('STATIC_ROOT', default=str(BASE_DIR / 'staticfiles'))
 STATICFILES_DIRS = [d for d in [BASE_DIR / 'static'] if d.exists()]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = config('MEDIA_ROOT', default=str(BASE_DIR / 'media'))

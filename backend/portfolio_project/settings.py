@@ -16,7 +16,7 @@ def load_dotfile():
                 line = line.strip()
                 if line and not line.startswith('#') and '=' in line:
                     key, _, value = line.partition('=')
-                    os.environ.setdefault(key.strip(), value.strip())
+                    os.environ[key.strip()] = value.strip()
 
 load_dotfile()
 

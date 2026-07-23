@@ -275,6 +275,7 @@ input, textarea {
     color: var(--text-secondary);
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-md);
+    white-space: nowrap;
     transition: color var(--transition-fast), background var(--transition-fast);
 }
 
@@ -1562,16 +1563,36 @@ input, textarea {
         height: calc(100vh - var(--navbar-height));
         background: var(--bg-primary);
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
-        gap: var(--spacing-xl);
+        gap: var(--spacing-lg);
+        padding-top: var(--spacing-2xl);
         transform: translateX(100%);
         transition: transform var(--transition-base);
         z-index: 999;
+        overflow-y: auto;
     }
     
     .nav-menu.active {
         transform: translateX(0);
+    }
+    
+    .nav-list {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        width: 100%;
+        text-align: center;
+    }
+    
+    .nav-link {
+        font-size: var(--text-lg);
+        padding: var(--spacing-md) var(--spacing-xl);
+        display: block;
+        width: 100%;
+    }
+    
+    .nav-actions {
+        margin-top: var(--spacing-lg);
     }
     
     .nav-toggle {

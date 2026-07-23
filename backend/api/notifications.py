@@ -100,11 +100,16 @@ def telegram_xabar_yuborish(matn):
         return False
     
     try:
+        chat_id = int(chat_id)
+    except (ValueError, TypeError):
+        logger.error(f"Noto'g'ri TELEGRAM_CHAT_ID: {chat_id}")
+        return False
+    
+    try:
         url = f"https://api.telegram.org/bot{token}/sendMessage"
         data = {
             'chat_id': chat_id,
             'text': matn,
-            'parse_mode': 'HTML'
         }
         
         response = requests.post(url, data=data, timeout=10)
@@ -133,15 +138,15 @@ def kontakt_xabar_telegram(ism, email, kompaniya, mavzu, xabar):
         bool: Muvaffaqiyatli yuborildimi
     """
     telegram_matn = f"""
-🔔 <b>Yangi kontakt xabari!</b>
+🔔 Yangi kontakt xabari!
 
-👤 <b>Kimdan:</b> {ism}
-📧 <b>Email:</b> {email}
-🏢 <b>Kompaniya:</b> {kompaniya if kompaniya else "Ko'rsatilmagan"}
+👤 Kimdan: {ism}
+📧 Email: {email}
+🏢 Kompaniya: {kompaniya if kompaniya else "Ko'rsatilmagan"}
 
-📝 <b>Mavzu:</b> {mavzu}
+📝 Mavzu: {mavzu}
 
-💬 <b>Xabar:</b>
+💬 Xabar:
 {xabar}
 
 ---
@@ -163,10 +168,10 @@ def loyaltyha_xabar_telegram(loyiha_nomi, github_link):
         bool: Muvaffaqiyatli yuborildimi
     """
     telegram_matn = f"""
-🚀 <b>Yangi loyiha qo'shildi!</b>
+🚀 Yangi loyiha qo'shildi!
 
-📦 <b>Loyiha:</b> {loyiha_nomi}
-🔗 <b>GitHub:</b> {github_link}
+📦 Loyiha: {loyiha_nomi}
+🔗 GitHub: {github_link}
 
 ---
 Portfolio saytidagi loyihalar yangilandi

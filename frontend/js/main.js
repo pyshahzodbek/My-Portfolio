@@ -308,6 +308,24 @@ async function fetchGitHubRepos() {
 }
 
 async function fetchGitHubStats() {
+    // 1) Backend orqali olish (token xavfsiz, rate limit yo'q)
+    try {
+        var resp = await fetch(CONFIG.API_BASE_URL + '/github-statistika/?username=' + CONFIG.GITHUB_USERNAME);
+        if (resp.ok) {
+            var data = await resp.json();
+            if (data && !data.xato) {
+                return {
+                    jami_loyihalar: data.jami_loyihalar || 0,
+                    jami_yulduzlar: data.jami_yulduzlar || 0,
+                    obunachilar: data.obunachilar || 0,
+                };
+            }
+        }
+    } catch (e) {
+        console.log('Backend stats xatosi, fallback...');
+    }
+
+    // 2) Fallback: GitHub REST API (to'g'ridan-to'g'ri)
     try {
         var userResp = await fetch(CONFIG.GITHUB_API_URL + '/users/' + CONFIG.GITHUB_USERNAME);
         if (!userResp.ok) throw new Error('GitHub user xato');
@@ -376,9 +394,11 @@ function updateProfileData(profile) {
         setLink('footer-telegram', 'https://t.me/' + profile.telegram_username);
     }
     if (profile.github_username) {
-        setLink('github-link', 'https://github.com/' + profile.github_username);
-        setLink('github-profile', 'https://github.com/' + profile.github_username + '?tab=repositories');
-        setLink('footer-github', 'https://github.com/' + profile.github_username);
+        var ghUrl = profile.github_username.startsWith('http') ? profile.github_username : 'https://github.com/' + profile.github_username;
+        var ghUser = profile.github_username.replace('https://github.com/', '').replace('http://github.com/', '').replace(/\/$/, '');
+        setLink('github-link', ghUrl);
+        setLink('github-profile', 'https://github.com/' + ghUser + '?tab=repositories');
+        setLink('footer-github', ghUrl);
     }
     if (profile.linkedin_url) {
         setLink('linkedin-link', profile.linkedin_url);
